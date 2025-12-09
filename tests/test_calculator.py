@@ -236,3 +236,196 @@ class TestDivideByZero:
         with pytest.raises(ValueError) as excinfo:
             calc.divide(a, b)
         assert "Cannot divide by zero" in str(excinfo.value)
+
+class test_maximum_minimum_InputValues:
+    """Tests for maximum input values."""
+
+    def test_add_maximum_input_values(calc):
+        """Test adding maximum input values."""
+        # Arrange
+        calc = Calculator()
+        a = 1000000
+        b = 1
+        expected = 10000001
+
+        # Act
+        result = calc.add(a, b)
+
+        # Assert
+        assert result == expected
+    
+    def test_add_minimum_input_values(calc):
+        """Test adding minimum input values."""
+        # Arrange
+        calc = Calculator()
+        a = -1000000
+        b = -1
+        expected = -1000001
+
+        # Act
+        result = calc.add(a, b)
+
+        # Assert
+        assert result == expected
+    
+    def test_subtract_maximum_input_values(calc):
+        """Test subtracting maximum input values."""
+        # Arrange
+        calc = Calculator()
+        a = 1000000
+        b = -1
+        expected = 1000001
+
+        # Act
+        result = calc.subtract(a, b)
+
+        # Assert
+        assert result == expected
+
+    def test_subtract_minimum_input_values(calc):
+        """Test subtracting minimum input values."""
+        # Arrange
+        calc = Calculator()
+        a = -1000000
+        b = 1
+        expected = -1000001
+
+        # Act
+        result = calc.subtract(a, b)
+
+        # Assert
+        assert result == expected
+    
+    def test_multiply_maximum_input_values(calc):
+        """Test multiplying maximum input values."""
+        # Arrange
+        calc = Calculator()
+        a = 1000000
+        b = 1000
+        expected = 1000000000
+
+        # Act
+        result = calc.multiply(a, b)
+
+        # Assert
+        assert result == expected
+    
+    def test_multiply_minimum_input_values(calc):
+        """Test multiplying minimum input values."""
+        # Arrange
+        calc = Calculator()
+        a = -1000000
+        b = 1000
+        expected = -1000000000
+
+        # Act
+        result = calc.multiply(a, b)
+
+        # Assert
+        assert result == expected
+    
+    def test_divide_maximum_input_values(calc):
+        """Test dividing maximum input values."""
+        # Arrange
+        calc = Calculator()
+        a = 1000000
+        b = 2
+        expected = 500000
+
+        # Act
+        result = calc.divide(a, b)
+
+        # Assert
+        assert result == expected
+    
+    def test_divide_minimum_input_values(calc):
+        """Test dividing minimum input values."""
+        # Arrange
+        calc = Calculator()
+        a = -1000000
+        b = 2
+        expected = -500000
+
+        # Act
+        result = calc.divide(a, b)
+
+        # Assert
+        assert result == expected
+
+class test_exception_messages:
+    """Tests for exception messages."""
+
+    def test_invalid_input_exception_message(calc):
+        """Test the message of InvalidInputException."""
+        # Arrange
+        calc = Calculator()
+        a = 2000000  # Invalid input
+        b = 5
+
+        # Act & Assert
+        with pytest.raises(InvalidInputException) as excinfo:
+            calc.add(a, b)
+        assert str(excinfo.value) == "Input value out of valid range (-1,000,000 to 1,000,000)"
+
+    def test_divide_by_zero_exception_message(calc):
+        """Test the message of ValueError when dividing by zero."""
+        # Arrange
+        calc = Calculator()
+        a = 5
+        b = 0
+
+        # Act & Assert
+        with pytest.raises(ValueError) as excinfo:
+            calc.divide(a, b)
+        assert str(excinfo.value) == "Cannot divide by zero"
+
+class test_only_b_is_invalid:
+    """Tests where only the second input is invalid."""
+
+    def test_add_only_b_invalid(calc):
+        """Test adding where only b is invalid."""
+        # Arrange
+        calc = Calculator()
+        a = 5
+        b = 2000000  # Invalid input
+
+        # Act & Assert
+        with pytest.raises(InvalidInputException) as excinfo:
+            calc.add(a, b)
+        assert "Input value out of valid range" in str(excinfo.value)
+
+    def test_subtract_only_b_invalid(calc):
+        """Test subtracting where only b is invalid."""
+        # Arrange
+        calc = Calculator()
+        a = 5
+        b = -2000000  # Invalid input
+
+        # Act & Assert
+        with pytest.raises(InvalidInputException) as excinfo:
+            calc.subtract(a, b)
+        assert "Input value out of valid range" in str(excinfo.value)
+    
+    def test_multiply_only_b_invalid(calc):
+        """Test multiplying where only b is invalid."""
+        # Arrange
+        calc = Calculator()
+        a = 5
+        b = 2000000  # Invalid input
+
+        # Act & Assert
+        with pytest.raises(InvalidInputException) as excinfo:
+            calc.multiply(a, b)
+        assert "Input value out of valid range" in str(excinfo.value)
+    
+    def test_divide_only_b_invalid(calc):
+        """Test dividing where only b is invalid."""
+        # Arrange
+        calc = Calculator()
+        a = 2000000 # Invalid input
+        b = 2  
+
+        # Act & Assert
+        with pytest.raises(InvalidInputException) as excinfo:
+            calc.divide(a, b)
+        assert "Input value out of valid range" in str(excinfo.value)
