@@ -71,7 +71,7 @@ pytest --cov=src --cov-report=html tests/
 
 View the HTML report:
 ```bash
-open htmlcov/index.html
+start htmlcov/index.html
 ```
 
 ## Project Structure

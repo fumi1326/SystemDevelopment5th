@@ -48,7 +48,7 @@ class Calculator:
         Raises:
             InvalidInputException: If any input is outside valid range
         """
-        self._validate_input(a, b)
+        self.Invalidinput(a, b)
         return a - b
 
     def multiply(self, a, b):
@@ -64,7 +64,7 @@ class Calculator:
         Raises:
             InvalidInputException: If any input is outside valid range
         """
-        self._validate_input(a, b)
+        self.Invalidinput(a, b)
         return a * b
 
     def divide(self, a, b):
@@ -81,7 +81,7 @@ class Calculator:
             InvalidInputException: If any input is outside valid range
             ValueError: If b is zero
         """
-        self._validate_input(a, b)
+        self.Invalidinput(a, b)
         if b == 0:
             raise ValueError("Cannot divide by zero")
         return a / b
