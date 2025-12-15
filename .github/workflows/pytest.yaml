@@ -28,4 +28,19 @@ jobs:
     
     - name: Run tests with pytest
       run: |
-        pytest tests/ -v
+        pytest tests/ -v --cov=src --cov-report=term-missing --cov-report=html
+    
+    - name: Upload coverage HTML report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: coverage-report-${{ matrix.python-version }}
+        path: htmlcov/
+    
+    - name: Coverage summary
+      if: matrix.python-version == '3.9'
+      run: |
+        echo "## Coverage Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        pytest tests/ --cov=src --cov-report=term | grep -E "(TOTAL|Name)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
