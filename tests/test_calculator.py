@@ -5,10 +5,11 @@ Test suite for the Calculator class.
 import pytest
 from calculator.calculator import Calculator, InvalidInputException
 
-@pytest.fixture
 
+@pytest.fixture
 def calc():
     return Calculator()
+
 
 class TestAddition:
     """Tests for the add method."""
@@ -128,6 +129,8 @@ class TestSubtraction:
 
         # Assert
         assert result == expected
+
+
 class TestMultiplication:
     """Tests for the multiply method."""
 
@@ -144,6 +147,7 @@ class TestMultiplication:
 
         # Assert
         assert result == expected
+
 
 class TestDivision:
     """Tests for the divide method."""
@@ -162,6 +166,7 @@ class TestDivision:
         # Assert
         assert result == expected
 
+
 class TestaddInvalidInput:
     """Tests for invalid inputs in add method."""
 
@@ -176,6 +181,7 @@ class TestaddInvalidInput:
         with pytest.raises(InvalidInputException) as excinfo:
             calc.add(a, b)
         assert "Input value out of valid range" in str(excinfo.value)
+
 
 class TestSubtractInvalidInput:
     """Tests for invalid inputs in subtract method."""
@@ -192,6 +198,7 @@ class TestSubtractInvalidInput:
             calc.subtract(a, b)
         assert "Input value out of valid range" in str(excinfo.value)
 
+
 class TestMultiplyInvalidInput:
     """Tests for invalid inputs in multiply method."""
 
@@ -206,6 +213,7 @@ class TestMultiplyInvalidInput:
         with pytest.raises(InvalidInputException) as excinfo:
             calc.multiply(a, b)
         assert "Input value out of valid range" in str(excinfo.value)
+
 
 class TestDivideInvalidInput:
     """Tests for invalid inputs in divide method."""
@@ -222,6 +230,7 @@ class TestDivideInvalidInput:
             calc.divide(a, b)
         assert "Input value out of valid range" in str(excinfo.value)
 
+
 class TestDivideByZero:
     """Tests for division by zero in divide method."""
 
@@ -236,6 +245,7 @@ class TestDivideByZero:
         with pytest.raises(ValueError) as excinfo:
             calc.divide(a, b)
         assert "Cannot divide by zero" in str(excinfo.value)
+
 
 class test_maximum_minimum_InputValues:
     """Tests for maximum input values."""
@@ -253,7 +263,7 @@ class test_maximum_minimum_InputValues:
 
         # Assert
         assert result == expected
-    
+
     def test_add_minimum_input_values(calc):
         """Test adding minimum input values."""
         # Arrange
@@ -267,7 +277,7 @@ class test_maximum_minimum_InputValues:
 
         # Assert
         assert result == expected
-    
+
     def test_subtract_maximum_input_values(calc):
         """Test subtracting maximum input values."""
         # Arrange
@@ -295,7 +305,7 @@ class test_maximum_minimum_InputValues:
 
         # Assert
         assert result == expected
-    
+
     def test_multiply_maximum_input_values(calc):
         """Test multiplying maximum input values."""
         # Arrange
@@ -309,7 +319,7 @@ class test_maximum_minimum_InputValues:
 
         # Assert
         assert result == expected
-    
+
     def test_multiply_minimum_input_values(calc):
         """Test multiplying minimum input values."""
         # Arrange
@@ -323,7 +333,7 @@ class test_maximum_minimum_InputValues:
 
         # Assert
         assert result == expected
-    
+
     def test_divide_maximum_input_values(calc):
         """Test dividing maximum input values."""
         # Arrange
@@ -337,7 +347,7 @@ class test_maximum_minimum_InputValues:
 
         # Assert
         assert result == expected
-    
+
     def test_divide_minimum_input_values(calc):
         """Test dividing minimum input values."""
         # Arrange
@@ -352,6 +362,7 @@ class test_maximum_minimum_InputValues:
         # Assert
         assert result == expected
 
+
 class test_exception_messages:
     """Tests for exception messages."""
 
@@ -365,7 +376,10 @@ class test_exception_messages:
         # Act & Assert
         with pytest.raises(InvalidInputException) as excinfo:
             calc.add(a, b)
-        assert str(excinfo.value) == "Input value out of valid range (-1,000,000 to 1,000,000)"
+        assert (
+            str(excinfo.value)
+            == "Input value out of valid range (-1,000,000 to 1,000,000)"
+        )
 
     def test_divide_by_zero_exception_message(calc):
         """Test the message of ValueError when dividing by zero."""
@@ -378,6 +392,7 @@ class test_exception_messages:
         with pytest.raises(ValueError) as excinfo:
             calc.divide(a, b)
         assert str(excinfo.value) == "Cannot divide by zero"
+
 
 class test_only_b_is_invalid:
     """Tests where only the second input is invalid."""
@@ -405,7 +420,7 @@ class test_only_b_is_invalid:
         with pytest.raises(InvalidInputException) as excinfo:
             calc.subtract(a, b)
         assert "Input value out of valid range" in str(excinfo.value)
-    
+
     def test_multiply_only_b_invalid(calc):
         """Test multiplying where only b is invalid."""
         # Arrange
@@ -417,13 +432,13 @@ class test_only_b_is_invalid:
         with pytest.raises(InvalidInputException) as excinfo:
             calc.multiply(a, b)
         assert "Input value out of valid range" in str(excinfo.value)
-    
+
     def test_divide_only_b_invalid(calc):
         """Test dividing where only b is invalid."""
         # Arrange
         calc = Calculator()
-        a = 2000000 # Invalid input
-        b = 2  
+        a = 2000000  # Invalid input
+        b = 2
 
         # Act & Assert
         with pytest.raises(InvalidInputException) as excinfo:
